@@ -3,6 +3,7 @@ public class Lotto {
 	public static void main(String[] args) {
 		
 		//로또번호 6개 
+		//중복값 처리 안 되어있음 
 		int[] winner = new int[6];
 		System.out.print("로또번호: ");
 		
@@ -34,8 +35,5 @@ public class Lotto {
 		for (int i=0; i<6; i++) {
 			System.out.print(ball[i]+",");
 		}
-		
-		
-		
 	}
 }

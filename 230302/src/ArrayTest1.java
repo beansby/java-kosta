@@ -41,5 +41,4 @@ public class ArrayTest1 {
 		// 리터럴 값은 readonly 
 //		10 = 20;
 	}
-
 }
