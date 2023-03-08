@@ -1,4 +1,7 @@
 package exercise6;
+
+import javax.xml.crypto.Data;
+
 /**
  * 다음과 같이 정의된 메서드를 작성하고 테스트하시오.
  * 메서드명 : abs
@@ -17,6 +20,7 @@ public class Ex6_24 {
 	}
 	
 	static int abs(int value) {
-		return Math.abs(value);
+//		return Math.abs(value);
+		return value >= 0 ? value : -value ; 
 	}
 }

@@ -37,7 +37,7 @@ class Student2 {
 	
 	float getAverage() {
 		int sum = getTotal();
-		float avg = Math.round(((float)(sum/3f)));
+		float avg = (Math.round(sum / 3f *100))/100f;
 		return avg;
 	}
 

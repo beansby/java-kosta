@@ -19,11 +19,11 @@ public class Ex6_23 {
 	}
 	
 	static int max(int[] arr) {
-		if(arr == null || arr.length == 0) {
-			return -999999;
-		}
-		
 		int maxValue = 0;
+		if(arr == null || arr.length == 0) {
+			maxValue = - 999999;
+			return maxValue;
+		} 
 		for(int i=0; i<arr.length; i++) {
 			if(arr[i] > maxValue) {
 				maxValue = arr[i];
@@ -31,5 +31,13 @@ public class Ex6_23 {
 		}
 		
 		return maxValue;	
+		
+//		int m = -999999;
+//		for (int i=0; i<arr.length; i++) {
+//			if(arr[i]>m) {
+//				m = arr[i];
+//			}
+//		}
+//		return m;
 	}
 }

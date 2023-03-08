@@ -45,7 +45,7 @@ class Student {
 	
 	float getAverage() {
 		int sum = kor + eng + math;
-		float avg = (float)sum * 1000/1000f;
+		float avg = (Math.round(sum / 3f *1000))/1000f;
 		return avg;
 	}
 
