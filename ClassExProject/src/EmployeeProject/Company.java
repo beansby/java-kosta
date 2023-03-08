@@ -2,6 +2,8 @@ package EmployeeProject;
 
 import java.util.Scanner;
 
+import EmployeeProject.emp.Employee;
+
 public class Company {
 	public static void main(String[] args) {
 		
@@ -174,10 +176,10 @@ public class Company {
 		// 3) 방법 searchById() 수정
 		Employee e = null;
 		e = searchById();
-		System.out.println("현재 부서 : "+ e.dept);
+		System.out.println("현재 부서 : "+ e.getDept());
 		System.out.print("이동할 부서 : ");
 		String dept = sc.nextLine();
-		e.dept = dept;
+		e.setDept(dept);
 		System.out.println("부서 이동이 완료되었습니다.");
 		
 	}
@@ -204,10 +206,10 @@ public class Company {
 		// searchById() : 사번 입력, 조회, employee 리턴 
 		Employee e = null;
 		e = searchById();
-		System.out.println("현재 급여 : "+ e.pay);
+		System.out.println("현재 급여 : "+ e.getPay());
 		System.out.print("변경된 급여 : ");
 		int pay = Integer.parseInt(sc.nextLine());
-		e.pay = pay;
+		e.setPay(pay);
 		System.out.println("급여 변경이 완료되었습니다.");
 	}
 	
@@ -219,7 +221,7 @@ public class Company {
 		System.out.println("[ 급여총금액 ]");
 		int total = 0;
 		for(int i=0; i<cnt; i++) {
-			total += emps[i].pay;
+			total += emps[i].getPay();
 		}
 		System.out.println(total + " 원 ");
 	}
@@ -247,7 +249,7 @@ public class Company {
 			String id = sc.nextLine();
 			
 			for(int i=0; i<cnt; i++) {
-				if(emps[i].id.equals(id)) {
+				if(emps[i].getId().equals(id)) {
 					e = emps[i];
 					break;
 				}

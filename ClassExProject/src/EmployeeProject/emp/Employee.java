@@ -1,4 +1,4 @@
-package EmployeeProject;
+package EmployeeProject.emp;
 
 public class Employee {
 	static int sid = 1000;	//사번 자동생성 
@@ -32,5 +32,30 @@ public class Employee {
 		return "사번 : " + id + "\t 이름 : " + name + "\t 부서 : " + dept + "\t 급여 : " + pay ;
 	}
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getDept() {
+		return dept;
+	}
+
+	public void setDept(String dept) {
+		this.dept = dept;
+	}
+
+	public int getPay() {
+		return pay;
+	}
+
+	public void setPay(int pay) {
+		this.pay = pay;
+	}
+
+	
 	
 }
