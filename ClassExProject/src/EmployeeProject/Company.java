@@ -235,6 +235,11 @@ public class Company {
 //		}
 //	}
 	
+	/**
+	 * 사번으로 사원 조회하기
+	 * 사번 입력, null값 처리, 객체 리턴시까지 반복 
+	 * @return Employee 객체 
+	 */
 	Employee searchById() {
 		Employee e = null;
 		while(true) {
