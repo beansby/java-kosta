@@ -1,3 +1,4 @@
+package acc;
 
 public class Account {
 	String id;
@@ -14,11 +15,11 @@ public class Account {
 		return "계좌번호 :" +id+ ", 이름 : " +name+ ", 잔액 : " +balance;
 	}
 	
-	void deposit(int money) {
+	public void deposit(int money) {
 		balance += money;
 	}
 	
-	boolean withdraw(int money) {
+	public boolean withdraw(int money) {
 		if(money > balance) {
 			System.out.println("잔액이 부족합니다.");
 			return false;
@@ -33,4 +34,30 @@ public class Account {
 		String acc = "계좌번호 :" +id+ "\t 계좌주 : " +name+ "\t 잔액 : " +balance;
 		return acc;
 	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getBalance() {
+		return balance;
+	}
+
+	public void setBalance(int balance) {
+		this.balance = balance;
+	}
+	
+	
 }

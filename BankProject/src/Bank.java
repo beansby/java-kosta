@@ -1,6 +1,8 @@
 import java.awt.Menu;
 import java.util.Scanner;
 
+import acc.Account;
+
 public class Bank {
 	public static void main(String[] args) {
 		Bank bank = new Bank();
@@ -140,7 +142,7 @@ public class Bank {
 	Account searchAccById(String id) {
 		Account acc = null;
 		for(int i=0; i<cnt; i++) {
-			if(accs[i].id.equals(id)) {
+			if(accs[i].getId().equals(id)) {
 				acc = accs[i];
 				break;
 			}
