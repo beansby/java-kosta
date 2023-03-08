@@ -98,18 +98,25 @@ public class Company {
 //		System.out.println(e);
 		
 		// 3) 방법 while
-		Employee e = null;	
-		while(true) {
-			System.out.print("사번 : ");
-			String id = sc.nextLine();
-			e = searchById(id);
-			if(e == null) {
-				System.out.println("존재하지 않는 사원입니다.");
-			} else {
-				break;
-			}
-		}
+//		Employee e = null;	
+//		while(true) {
+//			System.out.print("사번 : ");
+//			String id = sc.nextLine();
+//			e = searchById(id);
+//			if(e == null) {
+//				System.out.println("존재하지 않는 사원입니다.");
+//			} else {
+//				break;
+//			}
+//		}
+//		System.out.println(e);
+		
+		// searchById() : 사번 입력, 조회, employee 리턴 
+		Employee e = null;
+		e = searchById();
 		System.out.println(e);
+		
+		
 	}
 	
 	/**
@@ -130,19 +137,49 @@ public class Company {
 	 */
 	void transfer() {
 		System.out.println("[ 부서이동 ]");
-		System.out.print("사번 : ");
-		String id = sc.nextLine();
-		Employee e = searchById(id);
+		// 1) 방법 
+//		System.out.print("사번 : ");
+//		String id = sc.nextLine();
+//		Employee e = searchById(id);
+//		
+//		if(e == null) {
+//			System.out.println("존재하지 않는 사원입니다.");
+//		} else {
+//			System.out.println("현재 부서 : "+ e.dept);
+//			System.out.print("이동할 부서 : ");
+//			String dept = sc.nextLine();
+//			e.dept = dept;
+//			System.out.println("부서 이동이 완료되었습니다.");
+//		}
 		
-		if(e == null) {
-			System.out.println("존재하지 않는 사원입니다.");
-		} else {
-			System.out.println("현재 부서 : "+ e.dept);
-			System.out.print("이동할 부서 : ");
-			String dept = sc.nextLine();
-			e.dept = dept;
-			System.out.println("부서 이동이 완료되었습니다.");
-		}
+		// 2) 방법 while -> 반복되는 코드이기 때문에 searchById 에 작성 
+//		Employee e = null;
+//		while(true) {
+//			System.out.print("사번 : ");
+//			String id = sc.nextLine();
+//			e = searchById(id);
+//			
+//			if(e == null) {
+//				System.out.println("존재하지 않는 사원입니다.");
+//			} else {
+//				break;
+//			}
+//		}
+//		System.out.println("현재 부서 : "+ e.dept);
+//		System.out.print("이동할 부서 : ");
+//		String dept = sc.nextLine();
+//		e.dept = dept;
+//		System.out.println("부서 이동이 완료되었습니다.");
+		
+		// 3) 방법 searchById() 수정
+		Employee e = null;
+		e = searchById();
+		System.out.println("현재 부서 : "+ e.dept);
+		System.out.print("이동할 부서 : ");
+		String dept = sc.nextLine();
+		e.dept = dept;
+		System.out.println("부서 이동이 완료되었습니다.");
+		
 	}
 	
 	/**
@@ -150,19 +187,28 @@ public class Company {
 	 */
 	void negotiation() {
 		System.out.println("[ 급여변경 ]");
-		System.out.print("사번 : ");
-		String id = sc.nextLine();
-		Employee e = searchById(id);
+//		System.out.print("사번 : ");
+//		String id = sc.nextLine();
+//		Employee e = searchById(id);
+//		
+//		if(e == null) {
+//			System.out.println("존재하지 않는 사원입니다.");
+//		} else {
+//			System.out.println("현재 급여 : "+ e.pay);
+//			System.out.print("변경된 급여 : ");
+//			int pay = Integer.parseInt(sc.nextLine());
+//			e.pay = pay;
+//			System.out.println("급여 변경이 완료되었습니다.");
+//		}
 		
-		if(e == null) {
-			System.out.println("존재하지 않는 사원입니다.");
-		} else {
-			System.out.println("현재 급여 : "+ e.pay);
-			System.out.print("변경된 급여 : ");
-			int pay = Integer.parseInt(sc.nextLine());
-			e.pay = pay;
-			System.out.println("급여 변경이 완료되었습니다.");
-		}
+		// searchById() : 사번 입력, 조회, employee 리턴 
+		Employee e = null;
+		e = searchById();
+		System.out.println("현재 급여 : "+ e.pay);
+		System.out.print("변경된 급여 : ");
+		int pay = Integer.parseInt(sc.nextLine());
+		e.pay = pay;
+		System.out.println("급여 변경이 완료되었습니다.");
 	}
 	
 	/**
@@ -179,11 +225,32 @@ public class Company {
 	}
 	
 	
-	Employee searchById(String id) {
+//	Employee searchById(String id) {
+//		Employee e = null;
+//		for(int i=0; i<cnt; i++) {
+//			if(emps[i].id.equals(id)) {
+//				e = emps[i];
+//				break;
+//			}
+//		}
+//	}
+	
+	Employee searchById() {
 		Employee e = null;
-		for(int i=0; i<cnt; i++) {
-			if(emps[i].id.equals(id)) {
-				e = emps[i];
+		while(true) {
+			System.out.print("사번 : ");
+			String id = sc.nextLine();
+			
+			for(int i=0; i<cnt; i++) {
+				if(emps[i].id.equals(id)) {
+					e = emps[i];
+					break;
+				}
+			}
+			
+			if(e == null) {
+				System.out.println("존재하지 않는 사원입니다.");
+			} else {
 				break;
 			}
 		}
