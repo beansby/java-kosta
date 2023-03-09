@@ -1,7 +1,7 @@
-import java.awt.Menu;
 import java.util.Scanner;
 
 import acc.Account;
+import acc.SpecialAccount;
 
 public class Bank {
 	public static void main(String[] args) {
@@ -11,7 +11,7 @@ public class Bank {
 		while(run) {
 			int num = bank.menu();
 			switch (num) {
-				case 1 : bank.makeAccount();
+				case 1 : bank.makeAccountMenu();
 					break;
 				case 2 : bank.deposit();
 					break;
@@ -45,12 +45,29 @@ public class Bank {
 		return sel;
 	}
 	
-	
+
 	/**
 	 * 계좌개설 
 	 */
-	void makeAccount() {
+	void makeAccountMenu() {
 		System.out.println("[ 계좌개설 ]");
+		System.out.println(" 1. 일반계좌 | 2. 특수계좌 ");
+		System.out.print("선택>> ");
+		int num = Integer.parseInt(sc.nextLine());
+		
+		switch (num) {
+		case 1: makeAccount();
+			break;
+		case 2: makeSpecialAccount();
+		break;
+
+		default:
+			break;
+		}
+	}
+	
+	void makeAccount() {
+		System.out.println("[ 일반계좌개설 ]");
 		System.out.print("계좌번호 : ");
 		String id = sc.nextLine();
 		
@@ -64,6 +81,28 @@ public class Bank {
 			int money = Integer.parseInt(sc.nextLine());
 			
 			accs[cnt++] = new Account(id, name, money);
+			System.out.println("계좌개설이 완료되었습니다.");
+		}
+		
+	}
+	
+	void makeSpecialAccount() {
+		System.out.println("[ 특수계좌개설 ]");
+		System.out.print("계좌번호 : ");
+		String id = sc.nextLine();
+		
+		Account acc = searchAccById(id);
+		if(acc != null) {
+			System.out.println("중복된 계좌번호입니다.");
+		} else {
+			System.out.print("이름 :");
+			String name = sc.nextLine();
+			System.out.print("입금액 : ");
+			int money = Integer.parseInt(sc.nextLine());
+			System.out.print("등급 : ");
+			String grade = sc.nextLine();
+			
+			accs[cnt++] = new SpecialAccount(id, name, money, grade);
 			System.out.println("계좌개설이 완료되었습니다.");
 		}
 	}
@@ -121,7 +160,7 @@ public class Bank {
 		Account acc = searchAccById(id);
 		if(acc == null) {
 			System.out.println("없는 계좌번호입니다.");
-		} else System.out.println(acc);
+		} else System.out.println(acc.info());
 	}
 	
 	/**
@@ -130,7 +169,7 @@ public class Bank {
 	void allAccountInfo() {
 		System.out.println("[ 전체 계좌조회 ]");
 		for(int i=0; i<cnt; i++) {
-			System.out.println(accs[i]);
+			System.out.println(accs[i].info());
 		}
 	}
 	
