@@ -20,7 +20,6 @@ public class InterfaceTest2 {
 			}
 		});
 		loginBtn.onClick();
-		
 	}
 }
 
