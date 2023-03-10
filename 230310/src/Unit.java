@@ -5,4 +5,5 @@ public abstract class Unit {
 	void stop() {
 		System.out.println("("+ x +", "+ y +")에 멈춤");
 	}
+	
 }

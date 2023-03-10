@@ -1,5 +1,5 @@
 
-public class Marine extends Unit {
+public class Marine extends Unit implements Fightable {
 
 	@Override
 	void move(int x, int y) {
@@ -10,5 +10,12 @@ public class Marine extends Unit {
 	void stimPack() {
 		System.out.println("스팀팩한다");
 	}
+
+	@Override
+	public void attack() {
+		System.out.println("마린이 공격하고 있음");
+	}
+	
+	
 	
 }

@@ -1,5 +1,5 @@
 
-public class Tank extends Unit {
+public class Tank extends Unit implements Fightable {
 
 	@Override
 	void move(int x, int y) {
@@ -9,4 +9,11 @@ public class Tank extends Unit {
 	void changeMode() {
 		System.out.println("공격모드를 변환한다.");
 	}
+
+	@Override
+	public void attack() {
+		System.out.println("탱크가 공격하고 있음");
+	}
+	
+	
 }
