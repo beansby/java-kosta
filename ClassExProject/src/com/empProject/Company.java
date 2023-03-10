@@ -1,6 +1,7 @@
 package com.empProject;
 
 import com.empProject.emp.Employee;
+import com.empProject.emp.Sales;
 
 public class Company {
 	Employee[] emps = new Employee[100];
@@ -22,6 +23,10 @@ public class Company {
 			total += emps[i].getPay();
 		}
 		return total;
+	}
+	
+	public void regBusinessTrip(BusinessTrip emp, int day) {
+		emp.goBusinessTrip(day);
 	}
 	
 	

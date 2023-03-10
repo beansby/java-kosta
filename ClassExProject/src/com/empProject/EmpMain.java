@@ -22,11 +22,27 @@ import com.empProject.emp.Sales;
 public class EmpMain {
 	public static void main(String[] args) {
 		Company com = new Company();
-		com.enterEmp(new Permanent("1001","hong", 2000000));
-		com.enterEmp(new Sales("1002","kim", 2000000, 500000));
-		com.enterEmp(new PartTime("1003", "lee", 160, 15000));
+		
+		Permanent emp1 = new Permanent("1001","hong", 2000000);
+		Sales emp2 = new Sales("1002","kim", 2000000, 500000);
+		PartTime emp3 = new PartTime("1003", "lee", 160, 15000);
+		
+		com.enterEmp(emp1);
+		com.enterEmp(emp2);
+		com.enterEmp(emp3);
+		
+//		com.enterEmp(new Permanent("1001","hong", 2000000));
+//		com.enterEmp(new Sales("1002","kim", 2000000, 500000));
+//		com.enterEmp(new PartTime("1003", "lee", 160, 15000));
 		
 		com.allEmpInfo();
 		System.out.println("급여 총액: "+com.getTotalPay()+"원 ");
+		
+		System.out.println();
+		
+//		com.regBusinessTrip(emp1, 2);
+		com.regBusinessTrip(emp2, 2);
+		com.regBusinessTrip(emp3, 3);
+		com.allEmpInfo();
 	}
 }

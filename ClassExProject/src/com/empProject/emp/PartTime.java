@@ -1,6 +1,8 @@
 package com.empProject.emp;
 
-public class PartTime extends Employee {
+import com.empProject.BusinessTrip;
+
+public class PartTime extends Employee implements BusinessTrip {
 	int time;
 	int payPerTime;
 	
@@ -37,6 +39,12 @@ public class PartTime extends Employee {
 
 	public void setPayPerTime(int payPerTime) {
 		this.payPerTime = payPerTime;
+	}
+	
+
+	@Override
+	public void goBusinessTrip(int day) {
+		time += (day*24);
 	}
 	
 	

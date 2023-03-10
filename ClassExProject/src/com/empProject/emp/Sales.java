@@ -1,6 +1,8 @@
 package com.empProject.emp;
 
-public class Sales extends Permanent {
+import com.empProject.BusinessTrip;
+
+public class Sales extends Permanent implements BusinessTrip {
 	int incentive;
 	
 	public Sales() {}
@@ -21,5 +23,10 @@ public class Sales extends Permanent {
 
 	public void setIncentive(int incentive) {
 		this.incentive = incentive;
+	}
+	
+	@Override
+	public void goBusinessTrip(int day) {
+		incentive += 100000;
 	}
 }
