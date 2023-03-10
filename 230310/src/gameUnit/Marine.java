@@ -1,3 +1,4 @@
+package gameUnit;
 
 public class Marine extends Unit implements Fightable {
 
