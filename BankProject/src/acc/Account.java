@@ -1,5 +1,8 @@
 package acc;
 
+import exception.BANK_ERR;
+import exception.BankException;
+
 public class Account {
 	String id;
 	String name;
@@ -19,14 +22,20 @@ public class Account {
 		balance += money;
 	}
 	
-	public boolean withdraw(int money) {
-		if(money > balance) {
-			System.out.println("잔액이 부족합니다.");
-			return false;
-		} else { 
-			balance -= money; 
-			return true;
+	public void withdraw(int money) throws BankException {
+//		if(money > balance) {
+//			System.out.println("잔액이 부족합니다.");
+//			return false;
+//		} else { 
+//			balance -= money; 
+//			return true;
+//		}
+		
+		if(balance < money) {
+			throw new BankException("출금오류", BANK_ERR.WITHDRAW);
 		}
+		balance -= money;
+		
 	}
 	
 	@Override
