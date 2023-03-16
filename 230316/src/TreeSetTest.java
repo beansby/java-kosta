@@ -23,5 +23,14 @@ public class TreeSetTest {
 		
 		System.out.println(pset);
 		
+		System.out.println();
+		
+		TreeSet<Complex> cset = new TreeSet<>(new ComplexCompare()); //생성시에 Comparator 구현 객체 생성 
+		cset.add(new Complex(3,5));
+		cset.add(new Complex(4,7));
+		cset.add(new Complex(2,3));
+		
+		System.out.println(cset);
+		
 	}
 }

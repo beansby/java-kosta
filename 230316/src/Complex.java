@@ -31,6 +31,4 @@ public class Complex {
 		Complex c = (Complex) obj;
 		return c.real == real && c.imaginary == imaginary;
 	}
-	
-	
 }
