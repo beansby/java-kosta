@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class Person {
+public class Person implements Comparable<Person> {
 	int age;
 	String name;
 	
@@ -29,8 +29,10 @@ public class Person {
 		Person p = (Person) obj;
 		return name.equals(p.name) && age == p.age;
 	}
-	
-	
-	
+
+	@Override
+	public int compareTo(Person o) {
+		return age - o.age;
+	}
 	
 }
