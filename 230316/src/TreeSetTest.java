@@ -18,8 +18,8 @@ public class TreeSetTest {
 		
 		TreeSet<Person> pset = new TreeSet<>();	//ClassCastException : Comparable implements
 		pset.add(new Person("hong",20));
-		pset.add(new Person("song",15));
-		pset.add(new Person("oarj",17));
+		pset.add(new Person("kang",15));
+		pset.add(new Person("song",17));
 		
 		System.out.println(pset);
 		

@@ -32,7 +32,17 @@ public class Person implements Comparable<Person> {
 
 	@Override
 	public int compareTo(Person o) {
-		return age - o.age;
+		//ascending (나이순)
+//		return age - o.age;
+		//descending (나이순)
+//		return o.age - age;
+	
+		//ascending (이름순)
+//		return name.compareTo(o.name);
+		//descending (이름순)
+		return name.compareTo(o.name)*(-1);
+//		return o.name.compareTo(name);
+		
 	}
 	
 }
