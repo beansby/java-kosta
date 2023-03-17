@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.Scanner;
 
 import acc.Account;
@@ -44,7 +45,11 @@ public class Bank {
 		
 	}
 	
-	Account[] accs = new Account[100];
+	//계좌번호, 계좌 
+//	Account[] accs = new Account[100];
+	HashMap<String, Account> accs = new HashMap<>();
+	
+	
 	int cnt; //실제 개설된 계좌수  
 	static boolean run = true;
 	
@@ -93,8 +98,7 @@ public class Bank {
 		System.out.print("계좌번호 : ");
 		String id = sc.nextLine();
 		
-		Account acc = searchAccById(id);
-		if(acc != null) {
+		if(accs.containsKey(id)) {
 //			System.out.println("중복된 계좌번호입니다.");
 			throw new BankException("계좌오류", BANK_ERR.DOUBLE_ID);
 		} 
@@ -103,7 +107,7 @@ public class Bank {
 		System.out.print("입금액 : ");
 		int money = Integer.parseInt(sc.nextLine());
 		
-		accs[cnt++] = new Account(id, name, money);
+		accs.put(id, new Account(id, name, money));
 		System.out.println("계좌개설이 완료되었습니다.");
 	}
 	
@@ -112,8 +116,7 @@ public class Bank {
 		System.out.print("계좌번호 : ");
 		String id = sc.nextLine();
 		
-		Account acc = searchAccById(id);
-		if(acc != null) {
+		if(accs.containsKey(id)) {
 //			System.out.println("중복된 계좌번호입니다.");
 			throw new BankException("계좌오류", BANK_ERR.DOUBLE_ID);
 		} 
@@ -125,7 +128,7 @@ public class Bank {
 		System.out.print("등급 : ");
 		String grade = sc.nextLine();
 		
-		accs[cnt++] = new SpecialAccount(id, name, money, grade);
+		accs.put(id, new SpecialAccount(id, name, money, grade));
 		System.out.println("계좌개설이 완료되었습니다.");
 		
 	}
@@ -140,8 +143,7 @@ public class Bank {
 		System.out.print("계좌번호 : ");
 		String id = sc.nextLine();
 		
-		Account acc = searchAccById(id);
-		if(acc == null) {
+		if(!accs.containsKey(id)) {
 //			System.out.println("없는 계좌번호입니다.");
 			throw new BankException("계좌오류", BANK_ERR.NOT_ID);
 		} else {
@@ -151,7 +153,7 @@ public class Bank {
 			if(money <= 0) {
 				throw new BankException("금액오류", BANK_ERR.DEPOSIT);
 			}
-			acc.deposit(money);
+			accs.get(id).deposit(money);
 			System.out.println(money+"원 입금 완료되었습니다.");
 		}
 	}
@@ -165,8 +167,7 @@ public class Bank {
 		System.out.print("계좌번호 : ");
 		String id = sc.nextLine();
 		
-		Account acc = searchAccById(id);
-		if(acc == null) {
+		if(!accs.containsKey(id)) {
 //			System.out.println("없는 계좌번호입니다.");
 			throw new BankException("계좌오류", BANK_ERR.NOT_ID);
 		} else {
@@ -177,10 +178,10 @@ public class Bank {
 //				System.out.println(money+"원 출금 완료되었습니다.");
 //			} else { System.out.println("출금 실패했습니다."); }
 			
-			if(acc.getBalance() < money) {
-				throw new BankException("금액오류", BANK_ERR.WITHDRAW);
-			}
-			acc.withdraw(money);
+//			if(acc.getBalance() < money) {
+//				throw new BankException("금액오류", BANK_ERR.WITHDRAW);
+//			}
+			accs.get(id).withdraw(money);
 			System.out.println(money+"원 출금 완료되었습니다.");
 			
 		}
@@ -195,11 +196,11 @@ public class Bank {
 		System.out.println("[ 계좌조회 ]");
 		System.out.print("계좌번호 : ");
 		String id = sc.nextLine();
-		Account acc = searchAccById(id);
-		if(acc == null) {
+		
+		if(!accs.containsKey(id)) {
 			throw new BankException("계좌오류", BANK_ERR.NOT_ID);
 		}
-		System.out.println(acc.info());
+		System.out.println(accs.get(id).info());
 	}
 	
 	/**
@@ -207,24 +208,8 @@ public class Bank {
 	 */
 	void allAccountInfo() {
 		System.out.println("[ 전체 계좌조회 ]");
-		for(int i=0; i<cnt; i++) {
-			System.out.println(accs[i].info());
+		for(Account acc : accs.values()) {
+			System.out.println(acc.info());
 		}
-	}
-	
-	/**
-	 * 아이디로 계좌조회, 계좌 리턴 
-	 * @param id
-	 * @return
-	 */
-	Account searchAccById(String id) {
-		Account acc = null;
-		for(int i=0; i<cnt; i++) {
-			if(accs[i].getId().equals(id)) {
-				acc = accs[i];
-				break;
-			}
-		}
-		return acc;
 	}
 }

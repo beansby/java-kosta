@@ -18,7 +18,10 @@ public class Account {
 		return "계좌번호 :" +id+ ", 이름 : " +name+ ", 잔액 : " +balance;
 	}
 	
-	public void deposit(int money) {
+	public void deposit(int money) throws BankException {
+		if(money <= 0) {
+			throw new BankException("입금오류", BANK_ERR.DEPOSIT);
+		}
 		balance += money;
 	}
 	

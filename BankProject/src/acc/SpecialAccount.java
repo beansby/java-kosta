@@ -1,5 +1,6 @@
 package acc;
 
+import exception.BankException;
 
 //등급 : vip(0.04%), gold(0.03%), silver(0.02%), normal(0.01%) 
 // 10000 -> 10400
@@ -14,7 +15,7 @@ public class SpecialAccount extends Account {
 	}
 
 	@Override
-	public void deposit(int money) {
+	public void deposit(int money) throws BankException {
 		super.deposit(money +(int)(money*rate));
 	}
 	
