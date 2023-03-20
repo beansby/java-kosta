@@ -1,5 +1,11 @@
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 import acc.Account;
 import acc.SpecialAccount;
@@ -15,7 +21,7 @@ import exception.BankException;
 public class Bank {
 	public static void main(String[] args) {
 		Bank bank = new Bank();
-		
+		bank.loadAllAccount(); //데이터 읽어오기 
 		
 		while(true) {
 			try {
@@ -42,12 +48,14 @@ public class Bank {
 			}
 			System.out.println();
 		}
+		bank.saveAllAccount();	//데이터 저장하기 
 		
 	}
 	
 	//계좌번호, 계좌 
 //	Account[] accs = new Account[100];
-	HashMap<String, Account> accs = new HashMap<>();
+//	HashMap<String, Account> accs = new HashMap<>();
+	TreeMap<String, Account> accs = new TreeMap<>();
 	
 	
 	int cnt; //실제 개설된 계좌수  
@@ -56,7 +64,7 @@ public class Bank {
 	//사용자 입력
 	Scanner sc = new Scanner(System.in);
 	
-	int menu() {
+	int menu() throws BankException {
 		System.out.println("[ COCO BANK ]");
 		System.out.println(" 0. 종료 | 1. 계좌개설 | 2. 입금 | 3. 출금 | 4. 계좌조회 | 5. 전체계좌조회 ");
 		System.out.print("선택 >> ");
@@ -64,10 +72,13 @@ public class Bank {
 		int sel = 9;
 		try {
 			sel = Integer.parseInt(sc.nextLine());
+			if(sel < 0 || sel > 5) {
+				throw new BankException("메뉴오류", BANK_ERR.MENU);
+			}
 		} catch (NumberFormatException e) {
 //			e.printStackTrace();
 			System.out.println("입력 형식이 바르지 않습니다.");
-		}
+		} 
 		
 		return sel;
 	}
@@ -212,4 +223,63 @@ public class Bank {
 			System.out.println(acc.info());
 		}
 	}
+	
+	
+	void saveAllAccount() {
+		FileOutputStream fos = null;
+		DataOutputStream dos = null;
+		
+		try {
+			fos = new FileOutputStream("acc.data");
+			dos = new DataOutputStream(fos);
+			
+			dos.writeInt(accs.size());	//데이터 갯수
+			for (Account acc : accs.values()) {
+				if(acc instanceof SpecialAccount) {
+					dos.writeChar('S');
+					dos.writeUTF(((SpecialAccount)acc).getGrade());
+				} else {
+					dos.writeChar('N');
+				}
+				dos.writeUTF(acc.getId());
+				dos.writeUTF(acc.getName());
+				dos.writeInt(acc.getBalance());
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// 실행시 읽어오기 : while문 밖, 
+	void loadAllAccount() {
+		FileInputStream fis = null;
+		DataInputStream dis = null;
+		
+		try {
+			fis = new FileInputStream("acc.data");
+			dis = new DataInputStream(fis);
+			
+			int data = dis.readInt();
+			for(int i=0; i<data; i++) {
+				char type = dis.readChar();
+				if(type == 'S') {
+					String grade = dis.readUTF();
+					String id = dis.readUTF();
+					String name = dis.readUTF();
+					int balance = dis.readInt();
+					accs.put(id, new SpecialAccount(id, name, balance, grade));
+				} else if (type == 'N') {
+					String id = dis.readUTF();
+					String name = dis.readUTF();
+					int balance = dis.readInt();
+					accs.put(id, new Account(id, name, balance));
+				}
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
