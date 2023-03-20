@@ -224,7 +224,9 @@ public class Bank {
 		}
 	}
 	
-	
+	/**
+	 * data file 저장하기 
+	 */
 	void saveAllAccount() {
 		FileOutputStream fos = null;
 		DataOutputStream dos = null;
@@ -248,10 +250,18 @@ public class Bank {
 			
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if(dos != null) dos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
-	// 실행시 읽어오기 : while문 밖, 
+	/**
+	 * data file 읽어오기 
+	 */
 	void loadAllAccount() {
 		FileInputStream fis = null;
 		DataInputStream dis = null;
@@ -279,6 +289,12 @@ public class Bank {
 			
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if(dis != null) dis.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
