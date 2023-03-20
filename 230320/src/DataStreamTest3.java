@@ -8,8 +8,9 @@ import java.util.ArrayList;
 public class DataStreamTest3 {
 	public static void main(String[] args) {
 //		pers.add(new Person("hong", 20));
-//		pers.add(new Person("song", 25));
+//		pers.add(new Person("son", 32));
 //		pers.add(new Person("park", 30));
+//		pers.add(new Student("kang", 50, "computer"));
 //		writePersons();
 		
 		readPersons();
@@ -31,8 +32,18 @@ public class DataStreamTest3 {
 			
 			dos.writeInt(pers.size());	//데이터 갯수 저장 
 			for (Person p : pers) {		//데이터 저장 : 데이터 갯수만큼 반복  
+				// 타입을 구분하는 규칙 지정 : 앞 부분에 기재 
+				if(p instanceof Student) {
+					dos.writeChar('S');
+					dos.writeUTF(((Student)p).major); //downcasting 먼저 
+				} else { 
+					dos.writeChar('P');
+				}
+				
 				dos.writeUTF(p.name);
 				dos.writeInt(p.age);
+				
+				
 			}
 			
 		} catch (IOException e) {
@@ -65,13 +76,32 @@ public class DataStreamTest3 {
 			
 			int data = dis.readInt();
 			for (int i=0; i<data; i++) {
-				String name = dis.readUTF();
-				int age = dis.readInt();
-				pers.add(new Person(name, age));
+				char type = dis.readChar();
+				String major = null;
+				String name = null;
+				int age = 0;
+				
+				if(type == 'S') {
+					major = dis.readUTF();
+					name = dis.readUTF();
+					age = dis.readInt();
+					pers.add(new Student(name, age, major));
+				} else if(type == 'P') {
+					name = dis.readUTF();
+					age = dis.readInt();
+					pers.add(new Person(name, age));
+				}
+				
 			}
 			
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if(dis != null) dis.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		
 	}
@@ -91,4 +121,20 @@ class Person {
 	public String toString() {
 		return name+":"+age;
 	}
+}
+
+
+class Student extends Person {
+	String major;
+
+	public Student(String name, int age, String major) {
+		super(name, age);
+		this.major = major;
+	}
+
+	@Override
+	public String toString() {
+		return super.toString()+":"+major;
+	}
+	
 }
