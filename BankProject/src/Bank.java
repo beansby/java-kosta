@@ -1,7 +1,11 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -228,74 +232,71 @@ public class Bank {
 	 * data file 저장하기 
 	 */
 	void saveAllAccount() {
-		FileOutputStream fos = null;
-		DataOutputStream dos = null;
+		FileWriter fw = null;
+		BufferedWriter bw = null;
 		
 		try {
-			fos = new FileOutputStream("acc.data");
-			dos = new DataOutputStream(fos);
+			fw = new FileWriter("acc.txt");
+			bw = new BufferedWriter(fw);
 			
-			dos.writeInt(accs.size());	//데이터 갯수
-			for (Account acc : accs.values()) {
+			for(Account acc : accs.values()) {
+				String str = "";
+				str += acc.getId();
+				str += "," + acc.getName();
+				str += "," + acc.getBalance();
 				if(acc instanceof SpecialAccount) {
-					dos.writeChar('S');
-					dos.writeUTF(((SpecialAccount)acc).getGrade());
-				} else {
-					dos.writeChar('N');
+					str += "," + ((SpecialAccount)acc).getGrade();
 				}
-				dos.writeUTF(acc.getId());
-				dos.writeUTF(acc.getName());
-				dos.writeInt(acc.getBalance());
+				bw.write(str);
+				bw.newLine();
 			}
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				if(dos != null) dos.close();
+				if(bw != null) bw.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
+		
 	}
 	
 	/**
 	 * data file 읽어오기 
 	 */
 	void loadAllAccount() {
-		FileInputStream fis = null;
-		DataInputStream dis = null;
+		FileReader fr = null;
+		BufferedReader br = null;
 		
 		try {
-			fis = new FileInputStream("acc.data");
-			dis = new DataInputStream(fis);
+			fr = new FileReader("acc.txt");
+			br = new BufferedReader(fr);
 			
-			int data = dis.readInt();
-			for(int i=0; i<data; i++) {
-				char type = dis.readChar();
-				if(type == 'S') {
-					String grade = dis.readUTF();
-					String id = dis.readUTF();
-					String name = dis.readUTF();
-					int balance = dis.readInt();
+			String line = null;
+			while((line = br.readLine()) != null) {
+				String[] lines = line.split(","); 
+				String id = lines[0];
+				String name = lines[1];
+				int balance = Integer.parseInt(lines[2]);
+				if (lines.length == 4) {
+					String grade = lines[3];
 					accs.put(id, new SpecialAccount(id, name, balance, grade));
-				} else if (type == 'N') {
-					String id = dis.readUTF();
-					String name = dis.readUTF();
-					int balance = dis.readInt();
+				} else {
 					accs.put(id, new Account(id, name, balance));
 				}
 			}
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				if(dis != null) dis.close();
+				if(br != null) br.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
+		
 	}
 	
 }
