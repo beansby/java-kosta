@@ -1,0 +1,3 @@
+FileOutputStream : byte 기반
+OutputStreamWriter : byte -> 문자
+BufferedWriter : 문자 기반
