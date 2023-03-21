@@ -37,12 +37,12 @@ public class Ex8_09 {
 }
 
 class UnsupportedFuctionException extends RuntimeException {
-	String message;
 	final private int ERR_CODE;
 	
 	public UnsupportedFuctionException(String message, int errCode) {
+		super(message);
 		ERR_CODE = errCode;
-		this.message = message;
+		
 	}
 	
 	public int getErrorCode() {
@@ -51,6 +51,6 @@ class UnsupportedFuctionException extends RuntimeException {
 
 	@Override
 	public String getMessage() {
-		return "["+ERR_CODE+"]"+this.message;
+		return "["+ERR_CODE+"]"+super.getMessage();
 	}
 }

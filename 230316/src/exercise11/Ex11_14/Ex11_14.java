@@ -88,6 +88,7 @@ public class Ex11_14 {
 				4. q 또는 Q가 입력될 때까지 2~3의 작업을 반복한다. 
 			 */
 			
+			// 방법 1)
 			try {
 				String input = s.nextLine();
 				
@@ -100,9 +101,24 @@ public class Ex11_14 {
 					return;
 				}
 			} catch (Exception e) {
-//				e.printStackTrace();
 				System.out.println("입력 오류입니다.");
 			}
+			
+			// 방법 2)
+//			String input = s.nextLine();
+//			if(input.toLowerCase().equals("q")) break;
+//			String[] ins = input.split(",");
+//			try {
+//				String name = ins[0];
+//				int ban = Integer.parseInt(ins[1]);
+//				int no = Integer.parseInt(ins[2]);
+//				int kor = Integer.parseInt(ins[3]);
+//				int eng = Integer.parseInt(ins[4]);
+//				int math = Integer.parseInt(ins[5]);
+//				record.add(new Student(name, ban, no, kor, eng, math));
+//			} catch (Exception e) {
+//				System.out.println("입력 오류입니다. 이름, 반, 번호, 국어, 영어, 수학 순으로 입력하세요.");
+//			}
 			
 		} 
 	}

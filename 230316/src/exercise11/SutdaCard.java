@@ -18,7 +18,7 @@ public class SutdaCard {
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(isKwang, num);
+		return toString().hashCode();
 	}
 
 	@Override
