@@ -117,7 +117,6 @@ public class VendingMachineBiz implements IVendingMachineBiz {
 		System.out.println("---------------");
 		System.out.println("현재 잔액: "+balance+" 원");
 		
-		
 	}
 
 	public int getBalance() {
