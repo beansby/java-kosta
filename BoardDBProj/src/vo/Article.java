@@ -5,11 +5,17 @@ public class Article {
 	private Integer num;
 	private String title;
 	private String content;
-	private String writer;
+	private String writer;	// = user id 
 	
 	public Article() {}
 	public Article(Integer num, String title, String content, String writer) {
 		this.num = num;
+		this.title = title;
+		this.content = content;
+		this.writer = writer;
+	}
+	
+	public Article(String title, String content, String writer) {
 		this.title = title;
 		this.content = content;
 		this.writer = writer;
